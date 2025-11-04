@@ -18,9 +18,9 @@ export default function LinearGraph() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
-      <div className="w-full max-w-7xl grid gap-12 grid-cols-1 lg:grid-cols-[1fr_0.7fr]">
-
-        {/* --- FIRST CHART --- */}
+      <div className="w-full max-w-7xl grid gap-12 grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
+        
+        {/* --- FIRST (WIDER) CHART --- */}
         <motion.div
           className="p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
           initial={{ opacity: 0, y: 40 }}
@@ -128,7 +128,7 @@ export default function LinearGraph() {
               </LineChart>
             </ResponsiveContainer>
 
-            <div className="absolute top-1/2 left-[32%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-4">
+            <div className="absolute top-[52%] left-[32%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-4">
               <AiOutlineLine className="text-gray-700 text-3xl opacity-80 rotate-90" />
               <span className="text-xs text-gray-800">Incident Majeur</span>
             </div>
@@ -150,7 +150,7 @@ export default function LinearGraph() {
           </div>
         </motion.div>
 
-        {/* --- SECOND COMPONENT (NARROWER) --- */}
+        {/* --- SECOND (NARROWER) COMPONENT --- */}
         <motion.div
           className="p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 w-full"
           initial={{ opacity: 0, y: 40 }}
