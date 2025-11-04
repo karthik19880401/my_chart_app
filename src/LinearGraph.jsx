@@ -56,7 +56,7 @@ export default function LinearGraph() {
               <ResponsiveContainer>
                 <LineChart
                   data={data}
-                  margin={{ top: 40, right: 50, left: 50, bottom: 40 }} // shifted down by 10px
+                  margin={{ top: 50, right: 50, left: 50, bottom: 40 }} // moved down by 10px
                 >
                   <defs>
                     <linearGradient id={`colorValue${chartIndex}`} x1="0" y1="0" x2="0" y2="1">
@@ -147,21 +147,23 @@ export default function LinearGraph() {
               </ResponsiveContainer>
             </div>
 
-            {/* Dropdown moved outside the chart */}
-            <div className="mt-8 flex justify-end text-xs text-gray-700 items-center gap-2">
-              <span>Résolu par</span>
-              <select
-                value={resolver}
-                onChange={(e) => setResolver(e.target.value)}
-                className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
-              >
-                {resolvers.map((name) => (
-                  <option key={name} value={name}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Dropdown only for first chart */}
+            {chartIndex === 1 && (
+              <div className="mt-8 flex justify-end text-xs text-gray-700 items-center gap-2">
+                <span>Résolu par</span>
+                <select
+                  value={resolver}
+                  onChange={(e) => setResolver(e.target.value)}
+                  className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
+                >
+                  {resolvers.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </motion.div>
         ))}
       </div>
