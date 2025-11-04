@@ -49,7 +49,7 @@ export default function LinearGraph() {
 
           <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
             <ResponsiveContainer>
-              <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 80 }}>
+              <LineChart data={data} margin={{ top: 36, right: 60, left: 60, bottom: 87 }}>
                 <defs>
                   <linearGradient id="colorValue1" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#bae8e8" stopOpacity={0.8} />
@@ -61,6 +61,7 @@ export default function LinearGraph() {
                 <ReferenceLine x={11.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
                 <ReferenceLine x={15.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
 
+                {/* X axis moved 7px down */}
                 <XAxis
                   dataKey="hour"
                   type="number"
@@ -78,7 +79,7 @@ export default function LinearGraph() {
                       <g>
                         <text
                           x={x}
-                          y={y + 20}
+                          y={y + 27} // +7px lower than before
                           textAnchor="middle"
                           fill="#272343"
                           fontSize={12}
@@ -91,6 +92,7 @@ export default function LinearGraph() {
                   }}
                 />
 
+                {/* Line chart moved 4px up */}
                 <Line
                   type="linear"
                   dataKey="value"
@@ -104,11 +106,11 @@ export default function LinearGraph() {
                     const radius = isSAUHL2 ? 6 : 3;
                     return (
                       <g>
-                        <circle cx={cx} cy={cy} r={radius} fill={fillColor} stroke="#bae8e8" strokeWidth={1.5} />
+                        <circle cx={cx} cy={cy - 4} r={radius} fill={fillColor} stroke="#bae8e8" strokeWidth={1.5} />
                         {label && (
                           <text
                             x={cx + 10}
-                            y={cy - 10}
+                            y={cy - 14}
                             textAnchor="start"
                             fontSize={10}
                             fill="#272343"
