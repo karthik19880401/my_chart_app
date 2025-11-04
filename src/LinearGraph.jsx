@@ -41,12 +41,7 @@ export default function LinearGraph() {
             </div>
           </div>
 
-          <div className="flex justify-end items-center mb-6">
-            <p className="text-xs text-gray-700 text-right">
-              Résolu le 3 Novembre 2025
-            </p>
-          </div>
-
+          {/* Chart Container */}
           <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
             <ResponsiveContainer>
               <LineChart data={data} margin={{ top: 36, right: 60, left: 60, bottom: 87 }}>
@@ -79,7 +74,7 @@ export default function LinearGraph() {
                       <g>
                         <text
                           x={x}
-                          y={y + 27} // +7px lower than before
+                          y={y + 27}
                           textAnchor="middle"
                           fill="#272343"
                           fontSize={12}
