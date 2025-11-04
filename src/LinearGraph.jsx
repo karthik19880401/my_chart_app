@@ -52,11 +52,12 @@ export default function LinearGraph() {
               </p>
             </div>
 
-            <div className="w-full h-[280px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
+            {/* Chart container */}
+            <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-10 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
                 <LineChart
                   data={data}
-                  margin={{ top: 50, right: 50, left: 50, bottom: 40 }} // moved down by 10px
+                  margin={{ top: 40, right: 60, left: 60, bottom: 60 }}
                 >
                   <defs>
                     <linearGradient id={`colorValue${chartIndex}`} x1="0" y1="0" x2="0" y2="1">
@@ -65,7 +66,10 @@ export default function LinearGraph() {
                     </linearGradient>
                   </defs>
 
+                  {/* Highlighted zone */}
                   <ReferenceArea x1={10} x2={13} fill="oklch(0.977 0.013 236.62)" fillOpacity={1} />
+
+                  {/* Vertical reference lines */}
                   <ReferenceLine x={11.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
                   <ReferenceLine x={15.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
 
@@ -100,73 +104,3 @@ export default function LinearGraph() {
                   />
 
                   <Line
-                    type="linear"
-                    dataKey="value"
-                    stroke="#272343"
-                    strokeWidth={3}
-                    dot={(props) => {
-                      const { cx, cy, index } = props;
-                      const label = data[index].label;
-                      const isSAUHL2 = label === 'SAU - HL 2';
-                      const fillColor = isSAUHL2 ? 'red' : 'green';
-                      const radius = isSAUHL2 ? 6 : 3;
-                      return (
-                        <g>
-                          <circle
-                            cx={cx}
-                            cy={cy}
-                            r={radius}
-                            fill={fillColor}
-                            stroke="#bae8e8"
-                            strokeWidth={1.5}
-                          />
-                          {label && (
-                            <text
-                              x={cx + 10}
-                              y={cy - 10}
-                              textAnchor="start"
-                              fontSize={10}
-                              fill="#272343"
-                              fontFamily="Calibri"
-                            >
-                              {label}
-                            </text>
-                          )}
-                        </g>
-                      );
-                    }}
-                    activeDot={{ r: 6 }}
-                    fill={`url(#colorValue${chartIndex})`}
-                    isAnimationActive
-                    animationDuration={1500}
-                    style={{
-                      filter: 'drop-shadow(0px 4px 6px rgba(39,35,67,0.6))',
-                    }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Dropdown only for first chart */}
-            {chartIndex === 1 && (
-              <div className="mt-8 flex justify-end text-xs text-gray-700 items-center gap-2">
-                <span>Résolu par</span>
-                <select
-                  value={resolver}
-                  onChange={(e) => setResolver(e.target.value)}
-                  className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
-                >
-                  {resolvers.map((name) => (
-                    <option key={name} value={name}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
