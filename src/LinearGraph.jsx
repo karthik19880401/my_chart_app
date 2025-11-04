@@ -53,7 +53,7 @@ export default function LinearGraph() {
             </div>
 
             {/* Chart container */}
-            <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-10 flex items-end justify-center relative overflow-hidden">
+            <div className="w-full h-[360px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-10 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
                 <LineChart
                   data={data}
@@ -104,3 +104,51 @@ export default function LinearGraph() {
                   />
 
                   <Line
+                    type="linear"
+                    dataKey="value"
+                    stroke="#272343"
+                    strokeWidth={3}
+                    dot={(props) => {
+                      const { cx, cy, index } = props;
+                      const label = data[index].label;
+                      const isSAUHL2 = label === 'SAU - HL 2';
+                      const fillColor = isSAUHL2 ? 'red' : 'green';
+                      const radius = isSAUHL2 ? 6 : 3;
+                      return (
+                        <g>
+                          <circle
+                            cx={cx}
+                            cy={cy}
+                            r={radius}
+                            fill={fillColor}
+                            stroke="#bae8e8"
+                            strokeWidth={1.5}
+                          />
+                          {label && (
+                            <text
+                              x={cx + 10}
+                              y={cy - 10}
+                              textAnchor="start"
+                              fontSize={10}
+                              fill="#272343"
+                              fontFamily="Calibri"
+                            >
+                              {label}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    }}
+                    activeDot={{ r: 6 }}
+                    fill={`url(#colorValue${chartIndex})`}
+                    isAnimationActive
+                    animationDuration={1500}
+                    style={{
+                      filter: 'drop-shadow(0px 4px 6px rgba(39,35,67,0.6))',
+                    }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+
+              {/* Incident Majeur Label */}
+              <div className="absolute top-1/2 left-[35%] transform -translate-y-1/2 -translate-x-1/2 pointer-events-none flex items-center
