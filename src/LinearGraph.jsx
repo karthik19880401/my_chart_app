@@ -47,7 +47,7 @@ export default function LinearGraph() {
             </p>
           </div>
 
-          <div className="w-full h-[480px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
+          <div className="w-full h-[380px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
             <ResponsiveContainer>
               <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 80 }}>
                 <defs>
@@ -173,7 +173,7 @@ export default function LinearGraph() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center h-[480px] bg-gray-50 rounded-xl text-gray-400 text-sm italic">
+          <div className="flex justify-center items-center h-[380px] bg-gray-50 rounded-xl text-gray-400 text-sm italic">
             Aucun graphique pour cet incident
           </div>
         </motion.div>
