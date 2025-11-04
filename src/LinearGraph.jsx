@@ -55,9 +55,9 @@ export default function LinearGraph() {
             </div>
 
             {/* Chart Container */}
-            <div className="w-full h-[520px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
+            <div className="w-full h-[400px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-10 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
-                <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 120 }}>
+                <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 60 }}>
                   <defs>
                     <linearGradient id={`colorValue${chartIndex}`} x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#bae8e8" stopOpacity={0.8}/>
@@ -151,22 +151,22 @@ export default function LinearGraph() {
                 <AiOutlineLine className="text-gray-700 text-3xl opacity-80 rotate-90" />
                 <span className="text-xs text-gray-800">Incident Majeur</span>
               </div>
+            </div>
 
-              {/* Resolver Dropdown */}
-              <div className="absolute bottom-12 right-4 text-xs text-gray-700 flex items-center gap-2">
-                <span>Résolu par</span>
-                <select
-                  value={resolver}
-                  onChange={(e) => setResolver(e.target.value)}
-                  className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
-                >
-                  {resolvers.map((name) => (
-                    <option key={name} value={name}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Resolver Dropdown moved outside chart */}
+            <div className="mt-8 flex justify-end items-center text-xs text-gray-700 gap-2">
+              <span>Résolu par</span>
+              <select
+                value={resolver}
+                onChange={(e) => setResolver(e.target.value)}
+                className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
+              >
+                {resolvers.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
             </div>
           </motion.div>
         ))}
