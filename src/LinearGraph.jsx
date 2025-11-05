@@ -91,4 +91,69 @@ export default function LinearGraph() {
                         const ampm = hours >= 12 ? 'PM' : 'AM';
                         return (
                           <g>
-                            <text x={x} y={y
+                            <text x={x} y={y + 27} textAnchor="middle" fill="#272343" fontSize={12} fontFamily="Calibri">
+                              {`${displayHour}:${minutes.toString().padStart(2, '0')} ${ampm}`}
+                            </text>
+                          </g>
+                        );
+                      }}
+                    />
+
+                    <Line
+                      type="linear"
+                      dataKey="value"
+                      stroke="#272343"
+                      strokeWidth={3}
+                      dot={(props) => {
+                        const { cx, cy, index } = props;
+                        const label = data[index].label;
+                        const isSAUHL2 = label === 'SAU - HL 2';
+                        const fillColor = isSAUHL2 ? 'red' : 'green';
+                        const radius = isSAUHL2 ? 6 : 3;
+                        return (
+                          <g>
+                            <circle cx={cx} cy={cy - 4} r={radius} fill={fillColor} stroke="#bae8e8" strokeWidth={1.5} />
+                            {label && (
+                              <text x={cx + 10} y={cy - 14} textAnchor="start" fontSize={10} fill="#272343" fontFamily="Calibri">{label}</text>
+                            )}
+                          </g>
+                        );
+                      }}
+                      activeDot={{ r: 6 }}
+                      fill={`url(#colorValue${chartIndex})`}
+                      isAnimationActive
+                      animationDuration={1500}
+                      style={{ filter: 'drop-shadow(0px 4px 6px rgba(39,35,67,0.6))' }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
+
+              {chartIndex === 1 && (
+                <div className="absolute top-1/2 left-[32%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-4">
+                  <AiOutlineLine className="text-gray-700 text-3xl opacity-80 rotate-90" />
+                  <span className="text-xs text-gray-800">Incident Majeur</span>
+                </div>
+              )}
+            </div>
+
+            {chartIndex === 1 && (
+              <div className="mt-6 text-xs text-gray-700 flex items-center justify-end gap-2">
+                <span>Résolu par</span>
+                <select
+                  value={resolver}
+                  onChange={(e) => setResolver(e.target.value)}
+                  className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
+                >
+                  {resolvers.map((name) => (
+                    <option key={name} value={name}>{name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
