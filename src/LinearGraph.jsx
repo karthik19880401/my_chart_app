@@ -1,38 +1,77 @@
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, ResponsiveContainer, ReferenceArea, ReferenceLine } from 'recharts';
-import { motion } from 'framer-motion';
-import { AiOutlineLine } from 'react-icons/ai';
+import React, { useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  ResponsiveContainer,
+  ReferenceArea,
+  ReferenceLine,
+} from "recharts";
+import { motion } from "framer-motion";
+import { AiOutlineLine, AiFillDatabase, AiFillClockCircle, AiFillTool, AiOutlineCloud, AiFillCheckCircle } from "react-icons/ai";
 
 const data = [
-  { name: '9:00 AM', hour: 9, value: 60, label: "CDS - Niv 1" },
-  { name: '10:00 AM', hour: 10, value: 60, label: "CDS - Niv 2" },
-  { name: '1:00 PM', hour: 13, value: 60, label: "SAU - HL 2" },
-  { name: '2:00 PM', hour: 14, value: 60, label: "SAU - Data" },
-  { name: '4:10 PM', hour: 16.17, value: 60, label: "CDS - Niv 3" },
-  { name: '5:00 PM', hour: 17, value: 60, label: "CDS - Niv 1" }
+  { name: "9:00 AM", hour: 9, value: 60, label: "CDS - Niv 1" },
+  { name: "10:00 AM", hour: 10, value: 60, label: "CDS - Niv 2" },
+  { name: "1:00 PM", hour: 13, value: 60, label: "SAU - HL 2" },
+  { name: "2:00 PM", hour: 14, value: 60, label: "SAU - Data" },
+  { name: "4:10 PM", hour: 16.17, value: 60, label: "CDS - Niv 3" },
+  { name: "5:00 PM", hour: 17, value: 60, label: "CDS - Niv 1" },
 ];
 
-export default function LinearGraph() {
-  const [resolver, setResolver] = useState('Mark Miller');
-  const resolvers = ['Mark Miller', 'Flora MOREAU', 'Jean Dupont', 'Sophie Lambert'];
+export default function App() {
+  const [resolver, setResolver] = useState("Mark Miller");
+  const resolvers = ["Mark Miller", "Flora MOREAU", "Jean Dupont", "Sophie Lambert"];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
-      <div className="w-full max-w-7xl grid gap-12 grid-cols-1 lg:grid-cols-2">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white font-[Calibri] py-12 px-16">
+      {/* Intro Component */}
+      <motion.div
+        className="w-full max-w-7xl bg-white p-6 rounded-3xl shadow-md border border-gray-200 mb-10"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-lg font-semibold text-gray-900 mb-2 text-left">
+          Demande de restauration d'une archive Outlook
+        </h1>
+        <p className="text-sm text-gray-700 leading-relaxed text-left">
+          Ci-dessous, vous avez une vue d'ensemble de la procédure pour traiter une demande de restauration d'une archive.
+          Chacune des étapes est à appliquer consciencieusement, elle est décrite sur le panel à droite.
+          La ligne verticale du graph vous permet de voir les différents groupes d'affectation et leur temps d'intervention,
+          le graph sinusoidal vous montre le temps de traitement, la différence entre le temps de traitement d'une phase
+          préétablie et le temps pris pour le faire.
+        </p>
+      </motion.div>
+
+      {/* Layout with 3 columns */}
+      <div className="w-full max-w-7xl grid gap-10 grid-cols-1 lg:grid-cols-[6%,47%,47%]">
+        
+        {/* Left Icon Component */}
+        <motion.div
+          className="bg-white border border-gray-200 rounded-3xl shadow-md flex flex-col items-center justify-center py-10 gap-6"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {[AiFillDatabase, AiFillClockCircle, AiOutlineCloud, AiFillTool, AiFillCheckCircle].map((Icon, index) => (
+            <Icon key={index} className="text-gray-700 text-3xl hover:text-[#bae8e8] transition-colors" />
+          ))}
+        </motion.div>
+
+        {/* Chart Components */}
         {[1, 2].map((chartIndex) => (
           <motion.div
             key={chartIndex}
-            className={`p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
-              chartIndex === 1 ? 'h-[390px]' : ''
-            }`}
+            className="p-8 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             whileHover={{ scale: 1.01 }}
           >
             <div className="flex justify-between items-start mb-3">
-              <p className="text-xs text-gray-700 text-left">
-                Numéro d'incident : {chartIndex === 1 ? 'INC0123478' : 'INC0987654'}
+              <p className="text-xs text-gray-700">
+                Numéro d'incident : {chartIndex === 1 ? "INC0123478" : "INC0987654"}
               </p>
               <div className="flex flex-col items-end">
                 <h2 className="text-sm font-extrabold text-gray-950 mb-1 tracking-tight">
@@ -42,7 +81,7 @@ export default function LinearGraph() {
               </div>
             </div>
 
-            <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
+            <div className="w-full h-[300px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
                 <LineChart
                   data={data}
@@ -65,13 +104,13 @@ export default function LinearGraph() {
                     domain={[9, 17]}
                     ticks={[9, 10, 13, 14, 16.17, 17]}
                     stroke="#272343"
-                    axisLine={{ stroke: '#272343' }}
+                    axisLine={{ stroke: "#272343" }}
                     tickLine={false}
                     tick={({ x, y, payload }) => {
                       const hours = Math.floor(payload.value);
                       const minutes = Math.round((payload.value % 1) * 60);
                       const displayHour = hours > 12 ? hours - 12 : hours;
-                      const ampm = hours >= 12 ? 'PM' : 'AM';
+                      const ampm = hours >= 12 ? "PM" : "AM";
                       return (
                         <g>
                           <text
@@ -82,7 +121,7 @@ export default function LinearGraph() {
                             fontSize={12}
                             fontFamily="Calibri"
                           >
-                            {`${displayHour}:${minutes.toString().padStart(2, '0')} ${ampm}`}
+                            {`${displayHour}:${minutes.toString().padStart(2, "0")} ${ampm}`}
                           </text>
                         </g>
                       );
@@ -97,8 +136,8 @@ export default function LinearGraph() {
                     dot={(props) => {
                       const { cx, cy, index } = props;
                       const label = data[index].label;
-                      const isSAUHL2 = label === 'SAU - HL 2';
-                      const fillColor = isSAUHL2 ? 'red' : 'green';
+                      const isSAUHL2 = label === "SAU - HL 2";
+                      const fillColor = isSAUHL2 ? "red" : "green";
                       const radius = isSAUHL2 ? 6 : 3;
                       return (
                         <g>
@@ -129,7 +168,7 @@ export default function LinearGraph() {
                     fill={`url(#colorValue${chartIndex})`}
                     isAnimationActive
                     animationDuration={1500}
-                    style={{ filter: 'drop-shadow(0px 4px 6px rgba(39,35,67,0.6))' }}
+                    style={{ filter: "drop-shadow(0px 4px 6px rgba(39,35,67,0.6))" }}
                   />
                 </LineChart>
               </ResponsiveContainer>
