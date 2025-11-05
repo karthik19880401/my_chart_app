@@ -19,15 +19,17 @@ export default function LinearGraph() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
       
-      {/* --- Intro Text Component --- */}
+      {/* --- Intro Text Component (now left-aligned & styled like cards) --- */}
       <motion.div
-        className="max-w-6xl mb-10 text-center bg-[#f9fbfb] p-8 rounded-2xl shadow-md border border-gray-200"
+        className="max-w-6xl mb-10 bg-white text-left p-8 rounded-3xl shadow-md border border-gray-200 transition-all duration-500 hover:shadow-lg"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-xl font-bold text-[#272343] mb-3">Demande de restauration d'une archive Outlook</h1>
-        <p className="text-sm text-gray-700 leading-relaxed">
+        <h1 className="text-lg font-bold text-[#272343] mb-2">
+          Demande de restauration d'une archive Outlook
+        </h1>
+        <p className="text-sm text-gray-700 leading-relaxed max-w-4xl">
           Ci-dessous, vous avez une vue d'ensemble de la procédure pour traiter une demande de restauration d'une archive,
           chacune des étapes est à appliquer consciencieusement, elle est décrite sur le panel à droite.
           La ligne verticale du graph vous permet de voir les différents groupes d'affectation et leur temps d'intervention,
@@ -89,70 +91,4 @@ export default function LinearGraph() {
                         const ampm = hours >= 12 ? 'PM' : 'AM';
                         return (
                           <g>
-                            <text x={x} y={y + 27} textAnchor="middle" fill="#272343" fontSize={12} fontFamily="Calibri">
-                              {`${displayHour}:${minutes.toString().padStart(2, '0')} ${ampm}`}
-                            </text>
-                          </g>
-                        );
-                      }}
-                    />
-
-                    <Line
-                      type="linear"
-                      dataKey="value"
-                      stroke="#272343"
-                      strokeWidth={3}
-                      dot={(props) => {
-                        const { cx, cy, index } = props;
-                        const label = data[index].label;
-                        const isSAUHL2 = label === 'SAU - HL 2';
-                        const fillColor = isSAUHL2 ? 'red' : 'green';
-                        const radius = isSAUHL2 ? 6 : 3;
-                        return (
-                          <g>
-                            <circle cx={cx} cy={cy - 4} r={radius} fill={fillColor} stroke="#bae8e8" strokeWidth={1.5} />
-                            {label && (
-                              <text x={cx + 10} y={cy - 14} textAnchor="start" fontSize={10} fill="#272343" fontFamily="Calibri">{label}</text>
-                            )}
-                          </g>
-                        );
-                      }}
-                      activeDot={{ r: 6 }}
-                      fill={`url(#colorValue${chartIndex})`}
-                      isAnimationActive
-                      animationDuration={1500}
-                      style={{ filter: 'drop-shadow(0px 4px 6px rgba(39,35,67,0.6))' }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              )}
-
-              {chartIndex === 1 && (
-                <div className="absolute top-1/2 left-[32%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-4">
-                  <AiOutlineLine className="text-gray-700 text-3xl opacity-80 rotate-90" />
-                  <span className="text-xs text-gray-800">Incident Majeur</span>
-                </div>
-              )}
-            </div>
-
-            {/* Only show dropdown for the first chart */}
-            {chartIndex === 1 && (
-              <div className="mt-6 text-xs text-gray-700 flex items-center justify-end gap-2">
-                <span>Résolu par</span>
-                <select
-                  value={resolver}
-                  onChange={(e) => setResolver(e.target.value)}
-                  className="text-xs border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-1 focus:ring-[#bae8e8] bg-white"
-                >
-                  {resolvers.map((name) => (
-                    <option key={name} value={name}>{name}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
+                            <text x={x} y={y
