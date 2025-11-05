@@ -69,7 +69,7 @@ export default function LinearGraph() {
             </div>
 
             {/* === Chart === */}
-            <div className="flex-grow w-full h-[260px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-8 flex items-end justify-center relative overflow-hidden">
+            <div className="flex-grow w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-8 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
                 <LineChart
                   data={data}
