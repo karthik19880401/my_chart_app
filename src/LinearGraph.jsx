@@ -8,7 +8,13 @@ import {
   ReferenceLine,
 } from "recharts";
 import { motion } from "framer-motion";
-import { AiOutlineLine, AiFillDatabase, AiFillClockCircle, AiFillTool, AiOutlineCloud, AiFillCheckCircle } from "react-icons/ai";
+import {
+  AiFillDatabase,
+  AiFillClockCircle,
+  AiOutlineCloud,
+  AiFillTool,
+  AiFillCheckCircle,
+} from "react-icons/ai";
 
 const data = [
   { name: "9:00 AM", hour: 9, value: 60, label: "CDS - Niv 1" },
@@ -27,7 +33,7 @@ export default function App() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-white font-[Calibri] py-12 px-16">
       {/* Intro Component */}
       <motion.div
-        className="w-full max-w-7xl bg-white p-6 rounded-3xl shadow-md border border-gray-200 mb-10"
+        className="w-full max-w-7xl bg-white p-6 rounded-3xl mb-10"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -36,30 +42,32 @@ export default function App() {
           Demande de restauration d'une archive Outlook
         </h1>
         <p className="text-sm text-gray-700 leading-relaxed text-left">
-          Ci-dessous, vous avez une vue d'ensemble de la procédure pour traiter une demande de restauration d'une archive.
-          Chacune des étapes est à appliquer consciencieusement, elle est décrite sur le panel à droite.
-          La ligne verticale du graph vous permet de voir les différents groupes d'affectation et leur temps d'intervention,
-          le graph sinusoidal vous montre le temps de traitement, la différence entre le temps de traitement d'une phase
+          Ci-dessous, vous avez une vue d'ensemble de la procédure pour traiter une demande de
+          restauration d'une archive. Chacune des étapes est à appliquer consciencieusement, elle
+          est décrite sur le panel à droite. La ligne verticale du graph vous permet de voir les
+          différents groupes d'affectation et leur temps d'intervention, le graph sinusoidal vous
+          montre le temps de traitement, la différence entre le temps de traitement d'une phase
           préétablie et le temps pris pour le faire.
         </p>
       </motion.div>
 
-      {/* Layout with 3 columns */}
-      <div className="w-full max-w-7xl grid gap-10 grid-cols-1 lg:grid-cols-[6%,47%,47%]">
-        
+      {/* Layout */}
+      <div className="w-full max-w-7xl grid gap-10 grid-cols-1 lg:grid-cols-[6%,54%,40%]">
         {/* Left Icon Component */}
         <motion.div
-          className="bg-white border border-gray-200 rounded-3xl shadow-md flex flex-col items-center justify-center py-10 gap-6"
+          className="bg-white border border-gray-200 rounded-3xl flex flex-col items-center justify-center py-10 gap-6"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {[AiFillDatabase, AiFillClockCircle, AiOutlineCloud, AiFillTool, AiFillCheckCircle].map((Icon, index) => (
-            <Icon key={index} className="text-gray-700 text-3xl hover:text-[#bae8e8] transition-colors" />
-          ))}
+          {[AiFillDatabase, AiFillClockCircle, AiOutlineCloud, AiFillTool, AiFillCheckCircle].map(
+            (Icon, index) => (
+              <Icon key={index} className="text-gray-700 text-xl hover:text-[#bae8e8] transition-colors" />
+            )
+          )}
         </motion.div>
 
-        {/* Chart Components */}
+        {/* Charts */}
         {[1, 2].map((chartIndex) => (
           <motion.div
             key={chartIndex}
@@ -83,10 +91,7 @@ export default function App() {
 
             <div className="w-full h-[300px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
-                <LineChart
-                  data={data}
-                  margin={{ top: 40, right: 60, left: 60, bottom: 80 }}
-                >
+                <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 80 }}>
                   <defs>
                     <linearGradient id={`colorValue${chartIndex}`} x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#bae8e8" stopOpacity={0.8} />
