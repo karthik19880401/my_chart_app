@@ -9,7 +9,6 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import { AiOutlineLine } from "react-icons/ai";
-import { FaArchive, FaClock, FaUserCog, FaChartLine, FaCheckCircle } from "react-icons/fa";
 
 const data = [
   { name: "9:00 AM", hour: 9, value: 60, label: "CDS - Niv 1" },
@@ -25,33 +24,38 @@ export default function LinearGraph() {
   const resolvers = ["Mark Miller", "Flora MOREAU", "Jean Dupont", "Sophie Lambert"];
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
-      <div className="w-full max-w-7xl grid grid-cols-[6%,47%,47%] gap-6 items-stretch">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
+      {/* === Intro / Header Component === */}
+      <motion.div
+        className="w-full max-w-7xl bg-white text-left p-8 rounded-3xl shadow-md mb-8"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 className="text-lg font-semibold text-gray-900 mb-3">
+          Demande de restauration d'une archive Outlook
+        </h1>
+        <p className="text-sm text-gray-700 leading-relaxed">
+          Ci-dessous, vous avez une vue d'ensemble de la procédure pour traiter une demande de restauration d'une archive,
+          chacune des étapes est à appliquer consciencieusement, elle est décrite sur le panel à droite.
+          La ligne verticale du graph vous permet de voir les différents groupes d'affectation et leur temps d'intervention,
+          le graph sinusoidal vous montre le temps de traitement, la différence entre le temps de traitement d'une phase
+          prétablie et le temps pris pour le faire.
+        </p>
+      </motion.div>
 
-        {/* === LEFT ICON COLUMN === */}
-        <motion.div
-          className="flex flex-col justify-around items-center bg-white shadow-md rounded-3xl border border-gray-200 py-10"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <FaArchive className="text-2xl text-[#272343]" />
-          <FaClock className="text-2xl text-[#272343]" />
-          <FaUserCog className="text-2xl text-[#272343]" />
-          <FaChartLine className="text-2xl text-[#272343]" />
-          <FaCheckCircle className="text-2xl text-[#272343]" />
-        </motion.div>
-
-        {/* === FIRST CHART === */}
+      {/* === Charts Row === */}
+      <div className="w-full max-w-7xl grid grid-cols-2 gap-6 items-stretch">
         {[1, 2].map((chartIndex) => (
           <motion.div
             key={chartIndex}
             className="p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col justify-between"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             whileHover={{ scale: 1.01 }}
           >
+            {/* === Title === */}
             <div className="flex justify-between items-start mb-3">
               <p className="text-xs text-gray-700 text-left">
                 Numéro d'incident : {chartIndex === 1 ? "INC0123478" : "INC0987654"}
@@ -64,43 +68,23 @@ export default function LinearGraph() {
               </div>
             </div>
 
-            <div className="flex-grow w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-8 flex items-end justify-center relative overflow-hidden">
+            {/* === Chart === */}
+            <div className="flex-grow w-full h-[260px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-8 flex items-end justify-center relative overflow-hidden">
               <ResponsiveContainer>
                 <LineChart
                   data={data}
                   margin={{ top: 40, right: 60, left: 60, bottom: 80 }}
                 >
                   <defs>
-                    <linearGradient
-                      id={`colorValue${chartIndex}`}
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
+                    <linearGradient id={`colorValue${chartIndex}`} x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#bae8e8" stopOpacity={0.8} />
                       <stop offset="95%" stopColor="#bae8e8" stopOpacity={0} />
                     </linearGradient>
                   </defs>
 
-                  <ReferenceArea
-                    x1={10}
-                    x2={13}
-                    fill="oklch(0.977 0.013 236.62)"
-                    fillOpacity={1}
-                  />
-                  <ReferenceLine
-                    x={11.5}
-                    stroke="#272343"
-                    strokeDasharray="3 3"
-                    strokeWidth={1.5}
-                  />
-                  <ReferenceLine
-                    x={15.5}
-                    stroke="#272343"
-                    strokeDasharray="3 3"
-                    strokeWidth={1.5}
-                  />
+                  <ReferenceArea x1={10} x2={13} fill="oklch(0.977 0.013 236.62)" fillOpacity={1} />
+                  <ReferenceLine x={11.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
+                  <ReferenceLine x={15.5} stroke="#272343" strokeDasharray="3 3" strokeWidth={1.5} />
 
                   <XAxis
                     dataKey="hour"
@@ -125,9 +109,7 @@ export default function LinearGraph() {
                             fontSize={12}
                             fontFamily="Calibri"
                           >
-                            {`${displayHour}:${minutes
-                              .toString()
-                              .padStart(2, "0")} ${ampm}`}
+                            {`${displayHour}:${minutes.toString().padStart(2, "0")} ${ampm}`}
                           </text>
                         </g>
                       );
@@ -175,10 +157,7 @@ export default function LinearGraph() {
                       fill={`url(#colorValue${chartIndex})`}
                       isAnimationActive
                       animationDuration={1500}
-                      style={{
-                        filter:
-                          "drop-shadow(0px 4px 6px rgba(39,35,67,0.6))",
-                      }}
+                      style={{ filter: "drop-shadow(0px 4px 6px rgba(39,35,67,0.6))" }}
                     />
                   )}
                 </LineChart>
