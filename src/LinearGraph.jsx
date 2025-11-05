@@ -42,6 +42,4 @@ export default function LinearGraph() {
           <motion.div
             key={chartIndex}
             className={`p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${chartIndex === 1 ? 'h-[350px]' : 'h-[350px] w-[90%] justify-self-center'}`}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration
+            initial={{ opacity: 0
