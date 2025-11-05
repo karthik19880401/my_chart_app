@@ -19,7 +19,7 @@ export default function LinearGraph() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white font-[Calibri] py-20 px-20">
       
-      {/* --- Intro Text Component (now left-aligned & styled like cards) --- */}
+      {/* --- Intro Text Component --- */}
       <motion.div
         className="max-w-6xl mb-10 bg-white text-left p-8 rounded-3xl shadow-md border border-gray-200 transition-all duration-500 hover:shadow-lg"
         initial={{ opacity: 0, y: -20 }}
@@ -43,7 +43,7 @@ export default function LinearGraph() {
         {[1, 2].map((chartIndex) => (
           <motion.div
             key={chartIndex}
-            className={`p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${chartIndex === 1 ? 'h-[350px]' : 'h-[350px] w-[90%] justify-self-center'}`}
+            className={`p-10 rounded-3xl bg-white shadow-xl border border-gray-200 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${chartIndex === 1 ? 'h-[370px]' : 'h-[370px] w-[90%] justify-self-center'}`}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -61,7 +61,7 @@ export default function LinearGraph() {
               </div>
             </div>
 
-            <div className="w-full h-[240px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
+            <div className="w-full h-[260px] bg-gradient-to-b from-[#e3f6f5] to-[#ffffff] rounded-xl px-10 py-12 flex items-end justify-center relative overflow-hidden">
               {chartIndex === 1 && (
                 <ResponsiveContainer>
                   <LineChart data={data} margin={{ top: 40, right: 60, left: 60, bottom: 80 }}>
